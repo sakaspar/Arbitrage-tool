@@ -183,7 +183,7 @@ For issues, questions, or contributions, please open an issue on the GitHub repo
 
 api calls : 
 https://api.binance.com/api/v3/ticker/price
-https://api.kraken.com/0/public/Ticker?pair=XXBTZUSD,XETHZUSD,SOLUSD
+https://api.kraken.com/0/public/Ticker
 https://api.huobi.pro/market/tickers
 https://api.kucoin.com/api/v1/market/allTickers
 https://api.coinbase.com/v2/products

@@ -152,17 +152,23 @@ async function fetchCoinbasePrices() {
 // Fetch prices from Kraken
 async function fetchKrakenPrices() {
   try {
-    // Use the correct Kraken pairs
-    const pairs = ['XXBTZUSD', 'XETHZUSD', 'SOLUSD'];
-    const url = `${exchangeAPIs.kraken.baseUrl}${exchangeAPIs.kraken.getTicker}?pair=${pairs.join(',')}`;
+    // Use the correct Kraken endpoint to get ALL pairs
+    const url = `${exchangeAPIs.kraken.baseUrl}${exchangeAPIs.kraken.getTicker}`;
     console.log('Fetching Kraken prices from:', url);
     const response = await axios.get(url);
     console.log('Kraken response status:', response.status);
     const prices = {};
     
+    // Debug: Show total pairs available
+    const totalPairs = Object.keys(response.data.result).length;
+    console.log(`Kraken: Total pairs available: ${totalPairs}`);
+    
+    // Debug: Show some sample pairs
+    const samplePairs = Object.keys(response.data.result).slice(0, 10);
+    console.log('Sample Kraken pairs:', samplePairs);
+    
     Object.keys(response.data.result).forEach(pair => {
       const data = response.data.result[pair];
-      console.log('Kraken pair:', pair, 'data:', data);
       
       // Convert Kraken symbols to standard format
       let symbol = pair;
@@ -181,17 +187,39 @@ async function fetchKrakenPrices() {
           .replace('USD', 'USDT');
       }
       
-      const price = parseFloat(data.c[0]);
-      if (!isNaN(price) && price > 0.001) {
-        prices[symbol] = {
-          exchange: 'Kraken',
-          symbol: symbol,
-          price: price, // Current price
-          timestamp: Date.now()
-        };
-        console.log('Added Kraken price:', symbol, price);
+      // Only include USDT pairs
+      if (symbol.endsWith('USDT')) {
+        const price = parseFloat(data.c[0]);
+        if (!isNaN(price) && price > 0.001) {
+          prices[symbol] = {
+            exchange: 'Kraken',
+            symbol: symbol,
+            price: price, // Current price
+            timestamp: Date.now()
+          };
+          
+          // Debug: Log specific pairs we're interested in
+          if (symbol === 'BTCUSDT' || symbol === 'ETHUSDT' || symbol === 'SOLUSDT') {
+            console.log('Added Kraken price:', symbol, price);
+          }
+        }
       }
     });
+    
+    // Debug: Show how many USDT pairs we captured
+    const usdtPairsCount = Object.keys(prices).length;
+    console.log(`Kraken: Captured ${usdtPairsCount} USDT pairs`);
+    
+    // Debug: Show some sample captured USDT pairs
+    const sampleCaptured = Object.keys(prices).slice(0, 10);
+    console.log('Sample captured USDT pairs from Kraken:', sampleCaptured);
+    
+    // Debug: Check if BTCUSDT is in our captured prices
+    if (prices['BTCUSDT']) {
+      console.log('✅ BTCUSDT successfully captured from Kraken:', prices['BTCUSDT'].price);
+    } else {
+      console.log('❌ BTCUSDT NOT captured from Kraken');
+    }
     
     return prices;
   } catch (error) {

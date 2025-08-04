@@ -1,4 +1,5 @@
 Besh trunih : npm run dev on Linux or wsl 
+<img width="1927" height="1146" alt="image" src="https://github.com/user-attachments/assets/9f0ecbb3-35b8-4edb-8d74-ae1d87c99673" />
 
 # Crypto Arbitrage Scanner
 
@@ -186,4 +187,5 @@ https://api.binance.com/api/v3/ticker/price
 https://api.kraken.com/0/public/Ticker?pair=XXBTZUSD,XETHZUSD,SOLUSD
 https://api.huobi.pro/market/tickers
 https://api.kucoin.com/api/v1/market/allTickers
+
 https://api.coinbase.com/v2/products

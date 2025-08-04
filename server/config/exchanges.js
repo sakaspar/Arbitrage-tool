@@ -33,6 +33,20 @@ const exchanges = [
     url: 'https://www.huobi.com',
     description: 'Leading digital asset exchange with global presence',
     supportedPairs: ['BTCUSDT', 'ETHUSDT', 'SOLUSDT']
+  },
+  {
+    name: 'Bybit',
+    logo: 'https://cryptologos.cc/logos/bybit-logo.png',
+    url: 'https://www.bybit.com',
+    description: 'A global cryptocurrency exchange with a wide range of assets.',
+    supportedPairs: ['BTCUSDT', 'ETHUSDT', 'SOLUSDT']
+  },
+  {
+    name: 'MEXC',
+    logo: 'https://cryptologos.cc/logos/mexc-global-mexc-logo.png',
+    url: 'https://www.mexc.com',
+    description: 'A popular exchange known for its extensive list of altcoins.',
+    supportedPairs: ['BTCUSDT', 'ETHUSDT', 'SOLUSDT']
   }
 ];
 
